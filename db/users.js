@@ -1,6 +1,6 @@
 var records = [
-    { id: 1, username: 'jack', token: '123456789', displayName: 'Jack', emails: [ { value: 'jack@example.com' } ] }
-  , { id: 2, username: 'jill', token: 'abcdefghi', displayName: 'Jill', emails: [ { value: 'jill@example.com' } ] }
+    { id: 1, username: 'safi',password:"ACDFGBHN", token: '123456789', displayName: 'Jack', emails: [ { value: 'jack@example.com' } ] }
+  , { id: 2, username: 'jill',password:"THFDDFHJ", token: 'abcdefghi', displayName: 'Jill', emails: [ { value: 'jill@example.com' } ] }
 ];
 
 exports.findByToken = function(token, cb) {
@@ -8,6 +8,19 @@ exports.findByToken = function(token, cb) {
     for (var i = 0, len = records.length; i < len; i++) {
       var record = records[i];
       if (record.token === token) {
+        return cb(null, record);
+      }
+    }
+    return cb(null, null);
+  });
+}
+
+exports.findByPassword = function(username,password, cb) {
+  console.log("findByPassword",username,password)
+  process.nextTick(function() {
+    for (var i = 0, len = records.length; i < len; i++) {
+      var record = records[i];
+      if (record.username === username && record.password === password) {
         return cb(null, record);
       }
     }
